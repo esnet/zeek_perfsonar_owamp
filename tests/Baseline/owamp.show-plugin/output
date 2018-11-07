@@ -1,0 +1,7 @@
+PerfSONAR::OWAMP - One-Way Active Measurement Protocol analyzer (dynamic, version 0.1)
+    [Analyzer] OWAMP (ANALYZER_OWAMP, enabled)
+    [Event] owamp_log
+    [Event] owamp_server_greeting
+    [Event] owamp_client_reply
+    [Event] owamp_server_accept
+

@@ -1,0 +1,6 @@
+[package]
+#script_dir = scripts/PerfSONAR/OWAMP
+plugin_dir = build/PerfSONAR_OWAMP.tgz
+build_command = ( ./configure --bro-dist=%(bro_dist)s && make )
+test_command = cd tests && btest
+tags = plugin, analyzer, owamp, perfsonar

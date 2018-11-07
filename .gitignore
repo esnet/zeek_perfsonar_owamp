@@ -1,0 +1,4 @@
+build
+*.log
+.state
+.DS_Store
