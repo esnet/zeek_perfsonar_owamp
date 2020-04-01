@@ -38,7 +38,7 @@ function set_session(c: connection)
                 }
         }
 
-event bro_init() &priority=5
+event zeek_init() &priority=5
 	{
 	Log::create_stream(Owamp::LOG, [$columns=owamp_info, $path="owamp"]);
 
