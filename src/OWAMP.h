@@ -24,7 +24,7 @@ public:
 	virtual void Done();
 	
 	virtual void DeliverStream(int len, const u_char* data, bool orig);
-	virtual void Undelivered(uint64 seq, int len, bool orig);
+	virtual void Undelivered(uint64_t seq, int len, bool orig);
 
 	// Overriden from tcp::TCP_ApplicationAnalyzer.
 	virtual void EndpointEOF(bool is_orig);
