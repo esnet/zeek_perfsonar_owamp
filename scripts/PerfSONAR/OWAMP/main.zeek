@@ -79,12 +79,11 @@ event owamp_log(c: connection)
 	Log::write(Owamp::LOG, c$owamp);
 }
 
-event protocol_confirmation(c: connection, atype: Analyzer::Tag, aid: count) &priority=20
+event analyzer_confirmation_info(atype: AllAnalyzers::Tag, info: AnalyzerConfirmationInfo)
         {
-        if ( atype == Analyzer::ANALYZER_OWAMP )
-                {
-                set_session(c);
-#                c$owamp$analyzer_id = aid;
+		if ( atype == Analyzer::ANALYZER_OWAMP )
+				if ( info?$c ) {
+					set_session(info$c);
                 }
         }
 
