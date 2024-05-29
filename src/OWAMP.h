@@ -6,11 +6,11 @@
 #include "events.bif.h"
 
 
-#include "analyzer/protocol/tcp/TCP.h"
+#include "zeek/analyzer/protocol/tcp/TCP.h"
 
 #include "owamp_pac.h"
 
-namespace analyzer { namespace OWAMP {
+namespace zeek::analyzer { namespace OWAMP {
 
 class OWAMP_Analyzer
 
@@ -22,24 +22,24 @@ public:
 
 	// Overriden from Analyzer.
 	virtual void Done();
-	
+
 	virtual void DeliverStream(int len, const u_char* data, bool orig);
 	virtual void Undelivered(uint64_t seq, int len, bool orig);
 
 	// Overriden from tcp::TCP_ApplicationAnalyzer.
 	virtual void EndpointEOF(bool is_orig);
-	
+
 
 	static analyzer::Analyzer* InstantiateAnalyzer(Connection* conn)
 		{ return new OWAMP_Analyzer(conn); }
 
 protected:
 	binpac::OWAMP::OWAMP_Conn* interp;
-	
+
 	bool had_gap;
-	
+
 };
 
-} } // namespace analyzer::* 
+} } // namespace analyzer::*
 
 #endif
