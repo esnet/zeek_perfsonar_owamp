@@ -4,8 +4,8 @@
 #  - owamp-protocol.pac: describes the OWAMP protocol messages
 #  - owamp-analyzer.pac: describes the OWAMP analyzer code
 
-%include binpac.pac
-%include zeek.pac
+%include zeek/binpac.pac
+%include zeek/zeek.pac
 
 %extern{
 	#include "events.bif.h"

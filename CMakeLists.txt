@@ -38,6 +38,12 @@ foreach(file ${bif_files})
     zeek_plugin_bif(${file})
 endforeach ()
 
+file(GLOB pac_files RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "src/owamp.pac")
+foreach(file ${pac_files})
+    zeek_plugin_pac(${file})
+endforeach ()
+
+
 zeek_plugin_dist_files(README CHANGES COPYING VERSION)
 zeek_plugin_end()
 
