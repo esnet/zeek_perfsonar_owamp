@@ -4,8 +4,8 @@
 #  - owamp-protocol.pac: describes the OWAMP protocol messages
 #  - owamp-analyzer.pac: describes the OWAMP analyzer code
 
-%include binpac.pac
-%include bro.pac
+%include zeek/binpac.pac
+%include zeek/zeek.pac
 
 %extern{
 	#include "events.bif.h"
@@ -17,7 +17,7 @@ analyzer OWAMP withcontext {
 };
 
 # Our connection consists of two flows, one in each direction.
-connection OWAMP_Conn(bro_analyzer: BroAnalyzer) {
+connection OWAMP_Conn(bro_analyzer: ZeekAnalyzer) {
 	upflow   = OWAMP_Flow(true);
 	downflow = OWAMP_Flow(false);
 };

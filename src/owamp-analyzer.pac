@@ -6,7 +6,7 @@ refine flow OWAMP_Flow += {
 		# msg.modes is a uint8 and doesn't need any conversion to val
 
 		%{
-		BifEvent::generate_owamp_server_greeting(connection()->bro_analyzer(), 
+		zeek::BifEvent::enqueue_owamp_server_greeting(connection()->bro_analyzer(),
 												connection()->bro_analyzer()->Conn(),
 												${msg.modes});
 		return true;
@@ -16,10 +16,10 @@ refine flow OWAMP_Flow += {
 	function proc_owamp_client_reply(msg: Client_Reply): bool
 
 		%{
-		BifEvent::generate_owamp_client_reply(connection()->bro_analyzer(), 
+		zeek::BifEvent::enqueue_owamp_client_reply(connection()->bro_analyzer(),
 												connection()->bro_analyzer()->Conn(),
-												${msg.modes},bytestring_to_val(${msg.keyid}));
-		connection()->bro_analyzer()->ProtocolConfirmation();
+												${msg.modes},to_stringval(${msg.keyid}));
+		connection()->bro_analyzer()->AnalyzerConfirmation();
 		return true;
 
 		%}
@@ -27,7 +27,7 @@ refine flow OWAMP_Flow += {
 	function proc_owamp_server_accept(msg: Server_Accept): bool
 
 		%{
-		BifEvent::generate_owamp_server_accept(connection()->bro_analyzer(), 
+		zeek::BifEvent::enqueue_owamp_server_accept(connection()->bro_analyzer(),
 												connection()->bro_analyzer()->Conn(),
 												${msg.accept});
 
@@ -37,7 +37,7 @@ refine flow OWAMP_Flow += {
 
 };
 
-# A thought... 
+# A thought...
 # Should we not fire any events until we know for sure it's owamp?
 
 refine typeattr Server_Greeting += &let {
@@ -57,7 +57,7 @@ refine connection OWAMP_Conn += {
 		bool stop_analyzing;
 		bool server_done;
 		int server_state;
-	%}	
+	%}
 
 	%init{
 		stop_analyzing = false;

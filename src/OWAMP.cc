@@ -2,13 +2,13 @@
 
 #include "OWAMP.h"
 
-#include "analyzer/protocol/tcp/TCP_Reassembler.h"
+#include "zeek/analyzer/protocol/tcp/TCP_Reassembler.h"
 
-#include "Reporter.h"
+#include "zeek/Reporter.h"
 
 #include "events.bif.h"
 
-using namespace analyzer::OWAMP;
+using namespace zeek::analyzer::OWAMP;
 
 OWAMP_Analyzer::OWAMP_Analyzer(Connection* c)
 
@@ -18,7 +18,7 @@ OWAMP_Analyzer::OWAMP_Analyzer(Connection* c)
 	interp = new binpac::OWAMP::OWAMP_Conn(this);
 
 	had_gap = false;
-	
+
 	}
 
 OWAMP_Analyzer::~OWAMP_Analyzer()
@@ -28,12 +28,12 @@ OWAMP_Analyzer::~OWAMP_Analyzer()
 
 void OWAMP_Analyzer::Done()
 	{
-	
+
 	tcp::TCP_ApplicationAnalyzer::Done();
 
 	interp->FlowEOF(true);
 	interp->FlowEOF(false);
-	
+
 	}
 
 void OWAMP_Analyzer::EndpointEOF(bool is_orig)
@@ -68,7 +68,7 @@ void OWAMP_Analyzer::DeliverStream(int len, const u_char* data, bool orig)
 		}
 	catch ( const binpac::Exception& e )
 		{
-		ProtocolViolation(fmt("Binpac exception: %s", e.c_msg()));
+		AnalyzerViolation(zeek::util::fmt("Binpac exception: %s", e.c_msg()));
 		}
 	}
 
